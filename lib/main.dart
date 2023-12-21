@@ -40,53 +40,9 @@ class _XylophoneAppState extends State<XylophoneApp> {
   }
 
   Future<void> initSoundPool() async {
-    int soundId = await rootBundle
-        .load('assets/do1.wav')
-        .then((value) => pool.load(value));
-
-    _soundIds.add(soundId);
-
-    soundId = await rootBundle
-        .load('assets/re.wav')
-        .then((value) => pool.load(value));
-
-    _soundIds.add(soundId);
-
-    soundId = await rootBundle
-        .load('assets/mi.wav')
-        .then((value) => pool.load(value));
-
-    _soundIds.add(soundId);
-
-    soundId = await rootBundle
-        .load('assets/fa.wav')
-        .then((value) => pool.load(value));
-
-    _soundIds.add(soundId);
-
-    soundId = await rootBundle
-        .load('assets/sol.wav')
-        .then((value) => pool.load(value));
-
-    _soundIds.add(soundId);
-
-    soundId = await rootBundle
-        .load('assets/la.wav')
-        .then((value) => pool.load(value));
-
-    _soundIds.add(soundId);
-
-    soundId = await rootBundle
-        .load('assets/si.wav')
-        .then((value) => pool.load(value));
-
-    _soundIds.add(soundId);
-
-    soundId = await rootBundle
-        .load('assets/do2.wav')
-        .then((value) => pool.load(value));
-
-    _soundIds.add(soundId);
+    _soundIds = await Future.wait(['do1', 're', 'mi', 'fa', 'sol', 'la', ' si', 'do2'].map((e) {
+      return rootBundle.load('assets/$e').then((value) => pool.load(value));
+    }));
   }
 
   @override
